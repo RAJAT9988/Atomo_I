@@ -1,0 +1,4 @@
+- [x] Add image slider HTML section in int.html after first-page
+- [x] Add CSS styles for the slider in int.css
+- [x] Add JavaScript for auto-sliding every 3 seconds in int.js
+- [ ] Test the slider functionality
