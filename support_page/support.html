@@ -19,6 +19,35 @@
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="support.css"/>
+    
+    <style>
+        /* Success/Error Message Styles */
+        .form-message {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+        }
+        
+        .form-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .form-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+    </style>
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -80,6 +109,14 @@
         <div class="header">
             <h1>Contact Us</h1>
             <p>Fill out the form below and we'll get back to you soon</p>
+        </div>
+        
+        <!-- Success/Error Messages -->
+        <div id="successMessage" class="form-message form-success">
+            Thank you for contacting us! We'll get back to you soon.
+        </div>
+        <div id="errorMessage" class="form-message form-error">
+            There was an error submitting your form. Please try again.
         </div>
         
         <div class="form-container">
@@ -160,7 +197,7 @@
                 
                 <div class="checkbox-group">
                     <input type="checkbox" id="consent" name="consent" required>
-                    <label for="consent">By checking this box, I consent to the storage and processing of my personal information by Oizom to contact me regarding my request and receive occasional updates that may be of interest.</label>
+                    <label for="consent">By checking this box, I consent to the storage and processing of my personal information by Atomo Innovation to contact me regarding my request and receive occasional updates that may be of interest.</label>
                 </div>
                 
                 <div class="captcha-container">
@@ -182,6 +219,101 @@
     </div>
 
     <script src="support.js?v=2.2"></script>
+
+    <!-- Google Sheets Integration Script -->
+    <script>
+        // Google Sheets Integration for Support Form
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Google Apps Script Web App URL for SUPPORT FORM - REPLACE WITH YOUR NEW SCRIPT URL
+            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxvdjheOdgKsiZuwyBOffO95Yn9P5tzzHF3EquZX1njcsT1xSvQjkSeIlJBqzkZs9k/exec';
+            
+            // Add submit event listener to form
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Validate form
+                    if (!contactForm.checkValidity()) {
+                        // Trigger browser validation messages
+                        contactForm.reportValidity();
+                        return;
+                    }
+                    
+                    // Show loading state
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Submitting...';
+                    contactForm.classList.add('loading');
+                    
+                    // Hide previous messages
+                    successMessage.style.display = 'none';
+                    errorMessage.style.display = 'none';
+                    
+                    // Get form data
+                    const formData = new FormData(contactForm);
+                    
+                    // Add timestamp
+                    formData.append('timestamp', new Date().toISOString());
+                    formData.append('source', 'support_page');
+                    
+                    // Send data to Google Apps Script
+                    fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            return response.text();
+                        } else {
+                            throw new Error('Network response was not ok');
+                        }
+                    })
+                    .then(data => {
+                        console.log('Success:', data);
+                        
+                        // Show success message
+                        successMessage.style.display = 'block';
+                        errorMessage.style.display = 'none';
+                        
+                        // Reset form
+                        contactForm.reset();
+                        
+                        // Scroll to success message
+                        successMessage.scrollIntoView({ behavior: 'smooth' });
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        
+                        // Show error message
+                        errorMessage.style.display = 'block';
+                        successMessage.style.display = 'none';
+                        
+                        // Scroll to error message
+                        errorMessage.scrollIntoView({ behavior: 'smooth' });
+                    })
+                    .finally(() => {
+                        // Reset button state
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Submit';
+                        contactForm.classList.remove('loading');
+                    });
+                });
+            }
+            
+            // Simple CAPTCHA simulation
+            const captchaCheckbox = document.getElementById('captchaCheckbox');
+            if (captchaCheckbox) {
+                captchaCheckbox.addEventListener('click', function() {
+                    this.classList.toggle('checked');
+                    // In a real implementation, you would validate with reCAPTCHA API
+                });
+            }
+        });
+    </script>
 
     <section id="sixth-page">
         <footer id="footer">

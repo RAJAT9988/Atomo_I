@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
-   <head>
- <link rel="canonical" href="https://atomo.in/">
+<head>
+    <link rel="canonical" href="https://atomo.in/">
     <meta charset="UTF-8">
     <meta name="description"
         content="Atomo Innovation creates next-gen smart devices like Electron, Proton, Neutron, and AtomicOS for a connected future. Explore our IoT solutions for smart living.">
@@ -24,34 +25,115 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap">
-</noscript>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap">
+    </noscript>
 
     <link rel="preconnect" href="https://rsms.me/">
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css?v=1759138681076" media="print" onload="this.media='all'">
 
-    
-
     <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Atomo Innovation PVT. LTD.",
-  "url": "https://atomo.in",
-  "logo": "https://atomo.in/assets/atomoheaderlogo.png",
-  "sameAs": [
-    "https://www.facebook.com/profile.php?id=61574809191751",
-    "https://x.com/AtomoHQ",
-    "https://www.instagram.com/atomo.in/",
-    "https://www.linkedin.com/company/atomo-in"
-  ]
-}
-</script>
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Atomo Innovation PVT. LTD.",
+      "url": "https://atomo.in",
+      "logo": "https://atomo.in/assets/atomoheaderlogo.png",
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61574809191751",
+        "https://x.com/AtomoHQ",
+        "https://www.instagram.com/atomo.in/",
+        "https://www.linkedin.com/company/atomo-in"
+      ]
+    }
+    </script>
 
-
-
+    <style>
+        /* Email Collection Modal Styles */
+        .email-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .email-modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        
+        .email-modal h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        
+        .email-modal p {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .email-modal input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        .email-modal button {
+            background-color: #007cba;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        
+        .email-modal button:hover {
+            background-color: #005a87;
+        }
+        
+        .email-modal button.cancel {
+            background-color: #6c757d;
+        }
+        
+        .email-modal button.cancel:hover {
+            background-color: #545b62;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .success-message {
+            color: #28a745;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .error-message {
+            color: #dc3545;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -77,9 +159,6 @@
                 <li><a href="/airowl_page/airowl.html">Airowl</a></li>
                 <li><a href="support_page/support.html">Support</a></li>
                 <li><a href="/blogs/blogs.html">Blogs</a></li>
-
-
-
             </ul>
         </nav>
         <h1 id="main-title1">Electron</h1>
@@ -261,12 +340,18 @@
         </footer>
     </section>
 
-    <div id="subscription-popup" class="popup">
-        <div class="popup-content">
-            <h2>Coming Soon !</h2>
-            <p>Subscribe For Updates</p>
-            <input type="email" id="email-input" placeholder="Email" aria-label="Email input for subscription">
-            <button id="subscribe-button" class="subscribe-button">Subscribe</button>
+    <!-- Email Collection Modal -->
+    <div id="email-modal" class="email-modal">
+        <div class="email-modal-content">
+            <h2>Get Notified When Available</h2>
+            <p>Enter your email to be notified when this product becomes available for purchase.</p>
+            <input type="email" id="user-email" placeholder="Your email address" required>
+            <div class="success-message" id="success-message">Thank you! We'll notify you when this product is available.</div>
+            <div class="error-message" id="error-message">There was an error. Please try again.</div>
+            <div class="modal-buttons">
+                <button id="submit-email" class="submit-button">Submit</button>
+                <button id="cancel-email" class="cancel">Cancel</button>
+            </div>
         </div>
     </div>
 
@@ -280,46 +365,155 @@
         gtag('js', new Date());
 
         gtag('config', 'G-9B6Y9XH11N');
-
-
     </script>
 
-<script src="/path/to/image-preload.js?v=2.2" defer></script>
+    <script src="/path/to/image-preload.js?v=2.2" defer></script>
 
-<script>
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/sw.js?v=2.2')
-            .then(function(registration) {
-                console.log('SW registered successfully with scope: ', registration.scope);
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js?v=2.2')
+                    .then(function(registration) {
+                        console.log('SW registered successfully with scope: ', registration.scope);
+                        
+                        if (registration.waiting) {
+                            console.log('New service worker found in waiting state');
+                        }
+                        
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            console.log('New service worker found installing');
+                            
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed') {
+                                    console.log('New service worker installed');
+                                }
+                            });
+                        });
+                    })
+                    .catch(function(error) {
+                        console.log('SW registration failed: ', error);
+                    });
                 
-                if (registration.waiting) {
-                    console.log('New service worker found in waiting state');
+                navigator.serviceWorker.addEventListener('controllerchange', () => {
+                    console.log('Controller changed, page will be reloaded');
+                    window.location.reload();
+                });
+            });
+        }
+    </script>
+
+    <script>
+        // Google Sheets Integration
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all buy buttons
+            const buyButtons = document.querySelectorAll('.buy-button');
+            const emailModal = document.getElementById('email-modal');
+            const userEmailInput = document.getElementById('user-email');
+            const submitEmailButton = document.getElementById('submit-email');
+            const cancelEmailButton = document.getElementById('cancel-email');
+            const successMessage = document.getElementById('success-message');
+            const errorMessage = document.getElementById('error-message');
+            
+            let currentProduct = '';
+            
+            // Google Apps Script Web App URL - Replace with your own
+            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxQMpwuTz2QOgp-WuFVmamqdykOyTWK_sgrX14bqtiUSTjxoyGiZ-Iqk1e-O-NdDjh_/exec';
+            
+            // Add click event listeners to all buy buttons
+            buyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Get the product name from the button's parent section
+                    const section = this.closest('section');
+                    if (section) {
+                        const productTitle = section.querySelector('h1, h2');
+                        currentProduct = productTitle ? productTitle.textContent.trim() : 'Unknown Product';
+                    } else {
+                        const gridItem = this.closest('.grid-item');
+                        if (gridItem) {
+                            const productTitle = gridItem.querySelector('h2');
+                            currentProduct = productTitle ? productTitle.textContent.trim() : 'Unknown Product';
+                        } else {
+                            currentProduct = 'Unknown Product';
+                        }
+                    }
+                    
+                    // Show the email modal
+                    emailModal.style.display = 'flex';
+                    userEmailInput.value = '';
+                    successMessage.style.display = 'none';
+                    errorMessage.style.display = 'none';
+                });
+            });
+            
+            // Submit email to Google Sheets
+            submitEmailButton.addEventListener('click', function() {
+                const email = userEmailInput.value.trim();
+                
+                if (!email) {
+                    alert('Please enter your email address');
+                    return;
                 }
                 
-                registration.addEventListener('updatefound', () => {
-                    const newWorker = registration.installing;
-                    console.log('New service worker found installing');
+                if (!validateEmail(email)) {
+                    alert('Please enter a valid email address');
+                    return;
+                }
+                
+                // Prepare data to send
+                const formData = new FormData();
+                formData.append('email', email);
+                formData.append('product', currentProduct);
+                formData.append('timestamp', new Date().toISOString());
+                
+                // Send data to Google Apps Script
+                fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    } else {
+                        throw new Error('Network response was not ok');
+                    }
+                })
+                .then(data => {
+                    console.log('Success:', data);
+                    successMessage.style.display = 'block';
+                    errorMessage.style.display = 'none';
                     
-                    newWorker.addEventListener('statechange', () => {
-                        if (newWorker.state === 'installed') {
-                            console.log('New service worker installed');
-                        }
-                    });
+                    // Hide modal after 2 seconds
+                    setTimeout(() => {
+                        emailModal.style.display = 'none';
+                    }, 2000);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    errorMessage.style.display = 'block';
+                    successMessage.style.display = 'none';
                 });
-            })
-            .catch(function(error) {
-                console.log('SW registration failed: ', error);
             });
-        
-        navigator.serviceWorker.addEventListener('controllerchange', () => {
-            console.log('Controller changed, page will be reloaded');
-            window.location.reload();
+            
+            // Cancel button
+            cancelEmailButton.addEventListener('click', function() {
+                emailModal.style.display = 'none';
+            });
+            
+            // Close modal when clicking outside
+            emailModal.addEventListener('click', function(e) {
+                if (e.target === emailModal) {
+                    emailModal.style.display = 'none';
+                }
+            });
+            
+            // Email validation function
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
         });
-    });
-}
-</script>
-
+    </script>
 
 </body>
 
