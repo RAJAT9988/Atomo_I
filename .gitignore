@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+package-lock.json  # Optional, if you regenerate on deploy
+
+# Environment
+.env
+
+# Secrets
+credentials.json
+token.json
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
