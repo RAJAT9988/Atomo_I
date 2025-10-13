@@ -2137,10 +2137,10 @@ body {
 }
 .quote {
     text-align: center;
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 600;
     margin-bottom: 20px;
-    color: #3c3c3c;
+    color: #1a202c;
 }
 .logos-grid {
     display: grid;
@@ -2297,7 +2297,7 @@ body {
     position: relative;
 }
 
-.compatible-models h2::after {
+/* .compatible-models h2::after {
     content: '';
     position: absolute;
     bottom: -15px;
@@ -2307,7 +2307,7 @@ body {
     height: 4px;
     background: linear-gradient(135deg, #2b6cb0 0%, #1a4971 100%);
     border-radius: 2px;
-}
+} */
 
 .models-grid {
     display: grid;
