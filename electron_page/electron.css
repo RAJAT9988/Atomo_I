@@ -1205,7 +1205,7 @@ body {
         font-size: 1rem;
         right: 15px;
         left: auto;
-        width: 175px;
+        width: 200px;
     }
     #dots-container {
         bottom: 20px;
@@ -1448,6 +1448,7 @@ body {
     .matter-content {
         position: absolute;
         left: 50%;
+        top: 70px;
         transform: translateX(-50%);
         width: 90%;
         max-width: 400px;
