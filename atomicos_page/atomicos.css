@@ -1397,6 +1397,8 @@ body {
         margin: 0;
         text-align: center;
     }
+
+    
     #eighth-page,
     #fifth-page,
     #fourth-page,
@@ -1547,4 +1549,11 @@ body {
         width: calc(100% - 20px);
         height: 40vh;
     }
+}
+
+.ai-link {
+    background: linear-gradient(45deg, #fffb00, #ff0e5e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }

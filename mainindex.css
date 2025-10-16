@@ -165,6 +165,13 @@ body {
     color: #47a0e9;
     background-color: rgba(190, 170, 170, 0.05);
 }
+.ai-link {
+    background: linear-gradient(45deg, #fffb00, #ff0e5e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
 #navbar a::after {
     content: "";
     position: absolute;

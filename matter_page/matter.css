@@ -1767,3 +1767,11 @@ body {
         text-align: center;
     }
 }
+
+
+.ai-link {
+    background: linear-gradient(45deg, #fffb00, #ff0e5e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
