@@ -728,6 +728,8 @@ body {
     position: inherit;
     margin-top: -420px;
     padding-bottom: 3vh;
+    display: flex;
+    justify-content: center;
 }
 .price-button {
     background-color: #2b6cb0;
@@ -738,9 +740,12 @@ body {
     font-size: 1rem;
     margin-right: 10px;
     height: 5.74vh;
-    width: 20.46vh;
+    width: 26.46vh;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .price-button:hover {
     background-color: #1a4971;
@@ -753,9 +758,12 @@ body {
     border-radius: 65px;
     font-size: 1rem;
     height: 5.74vh;
-    width: 20.46vh;
+    width: 26.46vh;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .buy-button:hover {
     background-color: #2b6cb0;

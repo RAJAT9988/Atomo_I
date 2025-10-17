@@ -166,12 +166,17 @@ body {
     background-color: rgba(190, 170, 170, 0.05);
 }
 .ai-link {
-    background: linear-gradient(45deg, #fffb00, #ff0e5e);
+    background: linear-gradient(45deg, #007bff, #ff6b9d);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
-
+.ai-link:hover {
+    background: linear-gradient(45deg, #0056b3, #e91e63);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
 #navbar a::after {
     content: "";
     position: absolute;
