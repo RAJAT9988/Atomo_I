@@ -418,7 +418,7 @@
             let currentProduct = '';
             
             // Google Apps Script Web App URL - Replace with your own
-            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxQMpwuTz2QOgp-WuFVmamqdykOyTWK_sgrX14bqtiUSTjxoyGiZ-Iqk1e-O-NdDjh_/exec';
+            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwmqIP4eGXMdyQtK_gfKrywG6NOTBPfbnh6iWOqqE79pSv9FZuUd45umTMxB3xYfZjB/exec';
             
             // Add click event listeners to all buy buttons
             buyButtons.forEach(button => {
@@ -465,6 +465,7 @@
                 formData.append('email', email);
                 formData.append('product', currentProduct);
                 formData.append('timestamp', new Date().toISOString());
+                formData.append('source', 'buy_form'); 
                 
                 // Send data to Google Apps Script
                 fetch(GOOGLE_SCRIPT_URL, {
