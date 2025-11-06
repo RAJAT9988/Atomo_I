@@ -2881,7 +2881,8 @@
   .models-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px 15px; /* Reduced: 20px vertical, 15px horizontal */
+    gap: 34px 162px;
+ /* Reduced: 20px vertical, 15px horizontal */
     justify-items: center;
     align-items: start;
     padding: 20px; /* Reduced padding */
@@ -3155,19 +3156,19 @@
       background: #fff;
   }
 
-  .logo1 {
+  /* .logo1 {
       position: fixed;
       top: 14px;
       left: 24px;
       z-index: 1001;
-  }
+  } */
 
-  #hamburger {
+  /* #hamburger {
       position: fixed;
       top: 20px;
       right: 24px;
       z-index: 1001;
-  }
+  } */
 
   /* Responsive adjustments */
   @media (max-width: 768px) {
@@ -3520,19 +3521,19 @@
     z-index: 100;
 }
 
-.logo1 {
+/* .logo1 {
     position: fixed;
     top: 14px;
     left: 24px;
     z-index: 102;
-}
+} */
 
-#hamburger {
+/* #hamburger {
     position: fixed;
     top: 20px;
     right: 24px;
     z-index: 102;
-}
+} */
 
 
 
