@@ -3621,7 +3621,7 @@ gap: 0px;
 
 .model-item {
   position: relative;
-  height: 165px;
+    height: 130px;
   /* Same height for all */
 }
 
