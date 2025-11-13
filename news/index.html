@@ -653,7 +653,7 @@ async function loadNews() {
         console.log('Fetching from /api/news...');
 
         // Fetch news data
-        const response = await fetch('http://192.168.1.111:3007/api/news');
+        const response = await fetch('https://atomo.in:3007/api/news');
         console.log('Response status:', response.status);
 
         if (!response.ok) {
@@ -863,7 +863,7 @@ async function openNewsModal(newsId) {
     try {
         console.log('Opening modal for news ID:', newsId);
         
-        const response = await fetch(`http://192.168.1.111:3007/api/news/${newsId}`);
+        const response = await fetch(`https://atomo.in:3007/api/news/${newsId}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
