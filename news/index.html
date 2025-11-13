@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- <base href="http://localhost:8000/"> -->
+    <link rel="canonical" href="https://atomo.in/">
+    <meta charset="UTF-8">
+    <meta name="description"
+        content="Atomo Innovation creates next-gen smart devices like Electron, Proton, Neutron, and AtomicOS for a connected future. Explore our IoT solutions for smart living.">
+    <title>Atomo Innovation | Intelligent Edge Devices</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:url" content="https://atomo.in/">
+    <meta property="og:title" content="Atomo Innovation | Intelligent Edge Devices">
+    <meta property="og:description" content="Creating next-gen smart devices for a connected future.">
+    <meta property="og:image" content="https://atomo.in/assets/social-home.jpg">
+
+    <meta property="twitter:url" content="https://atomo.in/">
+    <meta property="twitter:title" content="Atomo Innovation | Intelligent Edge Devices">
+    <meta property="twitter:description" content="Creating next-gen smart devices for a connected future.">
+    <meta property="twitter:image" content="https://atomo.in/assets/social-home-twitter.jpg">
+    <link rel="icon" type="image/png?v=1.0" href="/assets/mainfavicon.ico" loading="lazy">
+    <link rel="stylesheet" href="news.css?v=1760594587080">
+    
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap">
+    </noscript>
+
+    <link rel="preconnect" href="https://rsms.me/">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css?v=1760594587080" media="print"
+        onload="this.media='all'">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Atomo Innovation PVT. LTD.",
+      "url": "https://atomo.in",
+      "logo": "https://atomo.in/assets/atomoheaderlogo.png",
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61574809191751",
+        "https://x.com/AtomoHQ",
+        "https://www.instagram.com/atomo.in/",
+        "https://www.linkedin.com/company/atomo-in"
+      ]
+    }
+    </script>
+
+    <style>
+
+        
+        /* Add these styles to your existing CSS */
+/* Enhanced loading states */
+.loading-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666;
+    background: rgba(255,255,255,0.8);
+    border-radius: 12px;
+    margin: 20px 0;
+}
+
+.loading-spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.newsletter-message {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 500;
+    display: none;
+}
+
+/* Ensure proper image handling */
+.news-image, .featured-image {
+    background-color: #f8f9fa;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.news-image:not([style*="background-image"]),
+.featured-image:not([style*="background-image"]) {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+}
+        /* Email Collection Modal Styles */
+        .email-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .email-modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .email-modal h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .email-modal p {
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .email-modal input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .email-modal button {
+            background-color: #007cba;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+
+        .email-modal button:hover {
+            background-color: #005a87;
+        }
+
+        .email-modal button.cancel {
+            background-color: #6c757d;
+        }
+
+        .email-modal button.cancel:hover {
+            background-color: #545b62;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+        }
+
+        .success-message {
+            color: #28a745;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .error-message {
+            color: #dc3545;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* NEWS SECTION STYLES */
+        .news-section {
+            padding: 80px 24px;
+            background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+            min-height: 100vh;
+        }
+
+        .news-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .news-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .news-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .news-subtitle {
+            font-size: 1.25rem;
+            color: #4a5568;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 200px;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-size: 1rem;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .news-content {
+            padding: 25px;
+        }
+
+        .news-date {
+            color: #3498db;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .news-card-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .news-excerpt {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .news-read-more {
+            display: inline-block;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .news-read-more:hover {
+            color: #2980b9;
+        }
+
+        .featured-news {
+            margin-bottom: 60px;
+        }
+
+        .featured-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (min-width: 768px) {
+            .featured-card {
+                flex-direction: row;
+            }
+        }
+
+        .featured-image {
+            flex: 1;
+            min-height: 300px;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .featured-content {
+            flex: 1;
+            padding: 40px;
+        }
+
+        .featured-date {
+            color: #3498db;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .featured-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .featured-excerpt {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .newsletter-section {
+            background: #2c3e50;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            border-radius: 12px;
+        }
+
+        .newsletter-section h2 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .newsletter-section p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+
+        .newsletter-button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .newsletter-button:hover {
+            background: #2980b9;
+        }
+
+        .more-news-btn {
+            display: block;
+            margin: 40px auto 0;
+            padding: 12px 32px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .more-news-btn:hover {
+            background: #2980b9;
+        }
+
+        @media (max-width: 768px) {
+            .news-section {
+                padding: 60px 16px;
+            }
+
+            .news-title {
+                font-size: 2.5rem;
+            }
+
+            .news-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-input, .newsletter-button {
+                width: 100%;
+                border-radius: 4px;
+                margin-bottom: 10px;
+            }
+        }
+
+        
+    </style>
+</head>
+
+<body>
+
+    <section id="first-page">
+        <div id="hamburger" class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <img class="logo1" src="/assets/atomoheaderlogo.png?v=1.1?v=1.0" alt="Atomo Logo" loading="lazy">
+        <nav id="navbar">
+            <ul>
+                <a href="/index.html"><img class="navbar-logo" src="/assets/atomoheaderlogo.png?v=1.1?v=1.0"
+                        alt="Atomo Logo" loading="lazy"></a>
+                <li><a href="/electron_page/electron.html">Electron</a></li>
+                <li><a href="/proton_page/proton.html">Proton</a></li>
+                <li><a href="/neutron_page/neutron.html">Neutron</a></li>
+                <li><a href="/atomicos_page/atomicos.html">AtomicOS</a></li>
+                <li><a href="/atomo-int_page/int.html">A.I</a></li>
+                <li><a href="/matter_page/matter.html">AtomoLink</a></li>
+                <li><a href="/smarthome_page/smarthome.html">Smart Home</a></li>
+                <li><a href="/airowl_page/airowl.html">Airowl</a></li>
+                <li><a href="support_page/support.html">Support</a></li>
+                <li><a href="/blogs/blogs.html">Blogs</a></li>
+            </ul>
+        </nav>
+    </section>
+
+    <!-- NEWS SECTION -->
+<section class="news-section">
+    <div class="news-container">
+        <div class="news-header">
+            <h1 class="news-title">Atomo News</h1>
+            <p class="news-subtitle">Stay updated with the latest innovations, product launches, and company announcements from Atomo Innovation.</p>
+        </div>
+
+        <!-- Loading State -->
+        <div id="news-loading" class="loading-state">
+            <div class="loading-spinner"></div>
+            <p>Loading latest news...</p>
+        </div>
+
+        <!-- Featured News -->
+        <div id="featured-news" class="featured-news">
+            <!-- Featured news will be loaded here dynamically -->
+        </div>
+
+        <!-- Recent News Grid -->
+        <div id="news-grid" class="news-grid">
+            <!-- News items will be loaded here dynamically -->
+        </div>
+
+        <button id="load-more-news" class="more-news-btn" style="display: none;">Load More News</button>
+
+        
+    </div>
+</section>
+
+    <section id="sixth-page">
+        <footer id="footer">
+            <div class="footer-top">
+
+                <div class="footer-brand">
+                    <h2 class="company-name">Atomo Innovation PVT. LTD.</h2>
+                    <p class="footer-tagline">Innovating the future of smart living</p>
+                    <div class="footer-social">
+                        <a href="https://x.com/AtomoHQ" class="social-link"><img
+                                src="https://img.icons8.com/ios-filled/50/ffffff/twitterx.png?v=1.1?v=1.0" alt="Twitter"
+                                loading="lazy"></a>
+                        <a href="https://www.facebook.com/profile.php?id=61574809191751" class="social-link"><img
+                                src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png?v=1.1?v=1.0"
+                                alt="Facebook" loading="lazy"></a>
+                        <a href="https://www.instagram.com/atomo.in/" class="social-link"><img
+                                src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png?v=1.1?v=1.0"
+                                alt="Instagram" loading="lazy"></a>
+                        <a href="https://www.linkedin.com/company/atomo-in" class="social-link"><img
+                                src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png?v=1.1?v=1.0"
+                                alt="LinkedIn" loading="lazy"></a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h3 class="link-title">India</h3>
+                        <ul>
+                            <li>W-406 4th Floor, Siddhraj Z Square Near Landmark Mall Kudasan Gandhinagar 382421 India
+                            </li>
+
+                            <li>AI Center of Excellence
+                                13th Floor, Gift Tower One, Gujarat International Finance Tec-City, Gandhinagar, Gujarat
+                                382355</li>
+
+                            <li>Email: &#104;&#101;&#108;&#108;&#111;&#64;&#97;&#116;&#111;&#109;&#111;&#46;&#105;&#110;
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="link-group">
+                        <h3 class="link-title">Products</h3>
+                        <ul>
+                            <li><a href="/electron_page/electron.html">Electron</a></li>
+                            <li><a href="/proton_page/proton.html">Proton</a></li>
+                            <li><a href="/neutron_page/neutron.html">Neutron</a></li>
+                            <li><a href="/airowl_page/airowl.html">Airowl</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="link-group">
+                        <h3 class="link-title">Quick Links</h3>
+                        <ul>
+                            <li><a href="/about_page/about.html">About Company</a></li>
+                            
+                            
+                            <li><a href="/presskit_page/press.html">Press-kit</a></li>
+                            <li><a href="/carrier_page/carrier.html">Career</a></li>
+                            <li><a href="/blogs/blogs.html">Blogs</a></li>
+                            <li><a href="/support_page/support.html">Support</a></li>
+                            <li><a href="#">News</a></li>
+                        </ul>
+                    </div>
+
+                    <a class="my-link" href="/index.html">
+                        <p>© 2025 Atomo Innovation Pvt. Ltd. All rights reserved.</p>
+                    </a>
+
+                </div>
+            </div>
+        </footer>
+    </section>
+
+
+<script>
+
+// Hamburger Menu Functionality
+function initializeHamburgerMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const navList = document.querySelector('#navbar ul');
+
+    if (!hamburger || !navList) {
+        console.warn('Hamburger or navList not found!');
+        return;
+    }
+
+    hamburger.addEventListener('click', function () {
+        navList.classList.toggle('active');
+        this.classList.toggle('open');
+
+        const navItems = document.querySelectorAll('#navbar ul li');
+        navItems.forEach((item, index) => {
+            if (navList.classList.contains('active')) {
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, index * 100);
+            } else {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(-10px)';
+            }
+        });
+    });
+
+    const navLinks = document.querySelectorAll('#navbar a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function () {
+            navList.classList.remove('active');
+            hamburger.classList.remove('open');
+            const navItems = document.querySelectorAll('#navbar ul li');
+            navItems.forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(-10px)';
+            });
+        });
+    });
+}
+
+// News loading functionality
+async function loadNews() {
+    console.log('Starting to load news...');
+
+    const loadingElement = document.getElementById('news-loading');
+    const featuredElement = document.getElementById('featured-news');
+    const gridElement = document.getElementById('news-grid');
+    const loadMoreBtn = document.getElementById('load-more-news');
+
+    // Reset displayed count
+    window.displayedNewsCount = 0;
+
+    try {
+        // Show loading state
+        if (loadingElement) {
+            loadingElement.style.display = 'block';
+            loadingElement.innerHTML = `
+                <div class="loading-spinner"></div>
+                <p>Loading latest news...</p>
+            `;
+        }
+
+        if (featuredElement) featuredElement.innerHTML = '';
+        if (gridElement) gridElement.innerHTML = '';
+
+        console.log('Fetching from /api/news...');
+
+        // Fetch news data
+        const response = await fetch('http://192.168.1.111:3007/api/news');
+        console.log('Response status:', response.status);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const news = await response.json();
+        console.log('News data received:', news);
+
+        // Hide loading
+        if (loadingElement) {
+            loadingElement.style.display = 'none';
+        }
+
+        if (!news || news.length === 0) {
+            console.log('No news data found');
+            if (gridElement) {
+                gridElement.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                        <h3>No news available yet</h3>
+                        <p>Check back later for updates from Atomo Innovation.</p>
+                    </div>
+                `;
+            }
+            return;
+        }
+
+        console.log(`Processing ${news.length} news items`);
+
+        // Store news data globally for load more functionality
+        window.allNewsData = news;
+
+        // Display featured news (first item)
+        if (featuredElement && news.length > 0) {
+            const featured = news[0];
+            console.log('Featured news:', featured);
+
+            const imageUrl = featured.image || 'https://via.placeholder.com/600x400/3498db/ffffff?text=Featured+News';
+            const excerpt = featured.subtitle || featured.content.substring(0, 200) + '...';
+
+            featuredElement.innerHTML = `
+                <div class="featured-card">
+                    <div class="featured-image" style="background-image: url('${imageUrl}')">
+                        ${!featured.image ? '<span style="color: #777; font-size: 1.2rem;">Featured News</span>' : ''}
+                    </div>
+                    <div class="featured-content">
+                        <div class="featured-date">${formatDate(featured.date)}</div>
+                        <h2 class="featured-title">${escapeHtml(featured.title)}</h2>
+                        <p class="featured-excerpt">${escapeHtml(excerpt)}</p>
+                        <a href="news-article.html?id=${featured.id}" class="news-read-more">Read Full Story</a>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Display recent news (skip first item as it's featured)
+        if (gridElement) {
+            if (news.length > 1) {
+                const recentNews = news.slice(1);
+                console.log('Recent news to display:', recentNews.length);
+                // Display first batch of 6 items (2 rows)
+                const initialBatchSize = 6;
+                const firstBatch = recentNews.slice(0, initialBatchSize);
+                displayNewsGrid(firstBatch, gridElement, false);
+                window.displayedNewsCount = initialBatchSize;
+
+                // Show load more button if there are more items
+                if (loadMoreBtn && recentNews.length > initialBatchSize) {
+                    loadMoreBtn.style.display = 'block';
+                    loadMoreBtn.onclick = loadMoreNews;
+                } else if (loadMoreBtn) {
+                    loadMoreBtn.style.display = 'none';
+                }
+            } else {
+                gridElement.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                        <p>More news coming soon...</p>
+                    </div>
+                `;
+                if (loadMoreBtn) loadMoreBtn.style.display = 'none';
+            }
+        }
+
+    } catch (error) {
+        console.error('Error loading news:', error);
+
+        if (loadingElement) {
+            loadingElement.style.display = 'none';
+        }
+
+        if (gridElement) {
+            gridElement.innerHTML = `
+                <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                    <h3>Unable to load news</h3>
+                    <p>Please check your connection and try again.</p>
+                    <button onclick="loadNews()" style="
+                        padding: 10px 20px;
+                        background: #3498db;
+                        color: white;
+                        border: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        margin-top: 10px;
+                    ">Retry</button>
+                    <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">
+                        Error: ${error.message}
+                    </p>
+                </div>
+            `;
+        }
+    }
+}
+
+function displayNewsGrid(newsItems, container, append = false) {
+    console.log('Displaying news grid with', newsItems.length, 'items');
+
+    if (!append && newsItems.length === 0) {
+        container.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                <p>No recent news available.</p>
+            </div>
+        `;
+        return;
+    }
+
+    if (!append) {
+        container.innerHTML = '';
+    }
+
+    newsItems.forEach((item, index) => {
+        const newsCard = document.createElement('div');
+        newsCard.className = 'news-card';
+
+        const imageUrl = item.image || 'https://via.placeholder.com/400x200/3498db/ffffff?text=Atomo+News';
+        const excerpt = item.subtitle || item.content.substring(0, 120) + '...';
+
+        newsCard.innerHTML = `
+            <div class="news-image" style="background-image: url('${imageUrl}')">
+                ${!item.image ? '<span style="color: #777;">News Image</span>' : ''}
+            </div>
+            <div class="news-content">
+                <div class="news-date">${formatDate(item.date)}</div>
+                <h3 class="news-card-title">${escapeHtml(item.title)}</h3>
+                <p class="news-excerpt">${escapeHtml(excerpt)}</p>
+                <a href="news-article.html?id=${item.id}" class="news-read-more">Read More</a>
+            </div>
+        `;
+
+        container.appendChild(newsCard);
+    });
+}
+
+function loadMoreNews() {
+    const gridElement = document.getElementById('news-grid');
+    const loadMoreBtn = document.getElementById('load-more-news');
+
+    if (!window.allNewsData || !gridElement) return;
+
+    const recentNews = window.allNewsData.slice(1); // Skip featured
+    const batchSize = 3;
+    const nextBatch = recentNews.slice(window.displayedNewsCount, window.displayedNewsCount + batchSize);
+
+    if (nextBatch.length > 0) {
+        displayNewsGrid(nextBatch, gridElement, true);
+        window.displayedNewsCount += nextBatch.length;
+
+        // Hide button if no more items
+        if (window.displayedNewsCount >= recentNews.length) {
+            loadMoreBtn.style.display = 'none';
+        }
+    } else {
+        loadMoreBtn.style.display = 'none';
+    }
+}
+
+function formatDate(dateString) {
+    try {
+        if (!dateString) return 'Recent';
+        
+        const date = new Date(dateString);
+        if (isNaN(date.getTime())) return 'Recent';
+        
+        const options = { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        };
+        return date.toLocaleDateString('en-US', options);
+    } catch (error) {
+        console.error('Date formatting error:', error);
+        return 'Recent';
+    }
+}
+
+function escapeHtml(unsafe) {
+    if (!unsafe) return '';
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+// News modal functionality
+async function openNewsModal(newsId) {
+    try {
+        console.log('Opening modal for news ID:', newsId);
+        
+        const response = await fetch(`http://192.168.1.111:3007/api/news/${newsId}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const newsItem = await response.json();
+        console.log('News item for modal:', newsItem);
+
+        // Create modal
+        const modal = document.createElement('div');
+        modal.id = 'newsModal';
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        `;
+
+        const modalContent = document.createElement('div');
+        modalContent.style.cssText = `
+            background: white;
+            border-radius: 12px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        `;
+
+        let imageHtml = '';
+        if (newsItem.image) {
+            imageHtml = `
+                <div style="
+                    width: 100%;
+                    height: 300px;
+                    background-image: url('${newsItem.image}');
+                    background-size: cover;
+                    background-position: center;
+                    border-radius: 12px 12px 0 0;
+                "></div>
+            `;
+        }
+
+        modalContent.innerHTML = `
+            ${imageHtml}
+            <div style="padding: 40px;">
+                <div style="color: #3498db; margin-bottom: 15px; font-weight: 500;">
+                    ${formatDate(newsItem.date)}
+                </div>
+                <h2 style="font-size: 2rem; margin-bottom: 20px; color: #2c3e50; line-height: 1.3;">
+                    ${escapeHtml(newsItem.title)}
+                </h2>
+                ${newsItem.subtitle ? `
+                    <p style="font-size: 1.2rem; color: #666; margin-bottom: 25px; font-weight: 500; line-height: 1.5;">
+                        ${escapeHtml(newsItem.subtitle)}
+                    </p>
+                ` : ''}
+                <div style="
+                    line-height: 1.8; 
+                    color: #444; 
+                    font-size: 1.1rem;
+                    white-space: pre-line;
+                    margin-bottom: 30px;
+                ">
+                    ${escapeHtml(newsItem.content)}
+                </div>
+                <button onclick="closeNewsModal()" style="
+                    padding: 12px 30px;
+                    background: #3498db;
+                    color: white;
+                    border: none;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    font-size: 1rem;
+                    font-weight: 500;
+                    transition: background 0.3s;
+                " onmouseover="this.style.background='#2980b9'" 
+                   onmouseout="this.style.background='#3498db'">
+                    Close Article
+                </button>
+            </div>
+        `;
+
+        modal.appendChild(modalContent);
+        document.body.appendChild(modal);
+
+        // Close modal when clicking outside content
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeNewsModal();
+            }
+        });
+
+    } catch (error) {
+        console.error('Error loading news details:', error);
+        alert('Sorry, we couldn\'t load the news article. Please try again.');
+    }
+}
+
+function closeNewsModal() {
+    const modal = document.getElementById('newsModal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+// Newsletter subscription
+function subscribeNewsletter(event) {
+    event.preventDefault();
+    
+    const emailInput = document.getElementById('newsletter-email');
+    const messageDiv = document.getElementById('newsletter-message');
+    
+    if (!emailInput || !messageDiv) {
+        console.error('Newsletter elements not found');
+        return;
+    }
+    
+    const email = emailInput.value.trim();
+    
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email)) {
+        messageDiv.textContent = 'Please enter a valid email address.';
+        messageDiv.style.color = '#dc3545';
+        messageDiv.style.display = 'block';
+        return;
+    }
+    
+    // Simulate subscription
+    messageDiv.textContent = 'Thank you for subscribing to our newsletter!';
+    messageDiv.style.color = '#28a745';
+    messageDiv.style.display = 'block';
+    emailInput.value = '';
+    
+    setTimeout(() => {
+        messageDiv.style.display = 'none';
+    }, 5000);
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded - initializing news section');
+
+    // Initialize hamburger menu
+    initializeHamburgerMenu();
+
+    const newsSection = document.querySelector('.news-section');
+    if (newsSection) {
+        console.log('News section found, loading news...');
+        loadNews();
+    }
+
+    // Add manual refresh button for testing
+    const newsHeader = document.querySelector('.news-header');
+    if (newsHeader) {
+        const refreshBtn = document.createElement('button');
+        refreshBtn.textContent = 'Refresh News';
+        refreshBtn.style.cssText = `
+            padding: 8px 16px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        `;
+        refreshBtn.onclick = loadNews;
+        refreshBtn.onmouseover = () => refreshBtn.style.background = '#34495e';
+        refreshBtn.onmouseout = () => refreshBtn.style.background = '#2c3e50';
+
+        newsHeader.appendChild(refreshBtn);
+    }
+});
+
+// Make functions globally available
+window.loadNews = loadNews;
+window.openNewsModal = openNewsModal;
+window.closeNewsModal = closeNewsModal;
+window.subscribeNewsletter = subscribeNewsletter;
+window.loadMoreNews = loadMoreNews;
+</script>
+    
+</body>
+
+</html>

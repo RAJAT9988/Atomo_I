@@ -89,12 +89,12 @@ document.addEventListener('DOMContentLoaded', function () {
             console.warn('Hamburger or navList not found!');
             return;
         }
- 
+
         hamburger.addEventListener('click', function () {
             navList.classList.toggle('active');
             this.classList.toggle('open');
 
-            const navItems = navList.querySelectorAll('li');
+            const navItems = document.querySelectorAll('#navbar ul li');
             navItems.forEach((item, index) => {
                 if (navList.classList.contains('active')) {
                     setTimeout(() => {
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
             link.addEventListener('click', function () {
                 navList.classList.remove('active');
                 hamburger.classList.remove('open');
-                const navItems = navList.querySelectorAll('li');
+                const navItems = document.querySelectorAll('#navbar ul li');
                 navItems.forEach(item => {
                     item.style.opacity = '0';
                     item.style.transform = 'translateY(-10px)';
