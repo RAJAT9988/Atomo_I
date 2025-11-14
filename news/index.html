@@ -472,7 +472,7 @@
                 <li><a href="/matter_page/matter.html">AtomoLink</a></li>
                 <li><a href="/smarthome_page/smarthome.html">Smart Home</a></li>
                 <li><a href="/airowl_page/airowl.html">Airowl</a></li>
-                <li><a href="support_page/support.html">Support</a></li>
+                <li><a href="/support_page/support.html">Support</a></li>
                 <li><a href="/blogs/blogs.html">Blogs</a></li>
             </ul>
         </nav>
@@ -567,7 +567,7 @@
                             <li><a href="/carrier_page/carrier.html">Career</a></li>
                             <li><a href="/blogs/blogs.html">Blogs</a></li>
                             <li><a href="/support_page/support.html">Support</a></li>
-                            <li><a href="#">News</a></li>
+                            <li><a href="/news/index.html">News</a></li>
                         </ul>
                     </div>
 
@@ -653,7 +653,7 @@ async function loadNews() {
         console.log('Fetching from /api/news...');
 
         // Fetch news data
-        const response = await fetch('https://3.110.51.14:3007/api/news');
+        const response = await fetch('https://atomo.in:3007/api/news');
         console.log('Response status:', response.status);
 
         if (!response.ok) {
@@ -863,7 +863,7 @@ async function openNewsModal(newsId) {
     try {
         console.log('Opening modal for news ID:', newsId);
         
-        const response = await fetch(`https://3.110.51.14:3007/api/news/${newsId}`);
+        const response = await fetch(`https://atomo.in:3007/api/news/${newsId}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
