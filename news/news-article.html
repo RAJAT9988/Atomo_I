@@ -87,6 +87,21 @@
             border-top: 1px solid #e0e0e0;
         }
 
+        .back-link {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s;
+}
+
+.back-link:hover {
+    color: #2980b9;
+}
+
         .nav-button {
             padding: 12px 24px;
             background: #3498db;
@@ -417,9 +432,8 @@
                     </div>
 
                     <div class="article-navigation">
-                        <a href="/news/index.html" class="nav-button secondary"> Back to News</a>
-                        <a href="/news/index.html" class="nav-button">View All News</a>
-                    </div>
+    <a href="/news/index.html" class="back-link">← Back to News</a>
+</div>
                 `;
 
                 container.innerHTML = articleHtml;
