@@ -867,28 +867,11 @@ function loadMoreNews() {
 
 function formatDate(dateString) {
     try {
-        if (!dateString) return 'Recent';
+        if (!dateString) return 'Date not available';
         
         const date = new Date(dateString);
-        if (isNaN(date.getTime())) return 'Recent';
+        if (isNaN(date.getTime())) return 'Date not available';
         
-        const now = new Date();
-        const diffTime = Math.abs(now - date);
-        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-        
-        // Show relative time for recent articles
-        if (diffDays === 0) {
-            return 'Today';
-        } else if (diffDays === 1) {
-            return 'Yesterday';
-        } else if (diffDays < 7) {
-            return `${diffDays} days ago`;
-        } else if (diffDays < 30) {
-            const weeks = Math.floor(diffDays / 7);
-            return `${weeks} week${weeks > 1 ? 's' : ''} ago`;
-        }
-        
-        // For older articles, show full date
         const options = { 
             year: 'numeric', 
             month: 'long', 
@@ -897,10 +880,9 @@ function formatDate(dateString) {
         return date.toLocaleDateString('en-US', options);
     } catch (error) {
         console.error('Date formatting error:', error);
-        return 'Recent';
+        return 'Date not available';
     }
 }
-
 function escapeHtml(unsafe) {
     if (!unsafe) return '';
     return unsafe
