@@ -21,7 +21,7 @@
     <meta property="twitter:description" content="Creating next-gen smart devices for a connected future.">
     <meta property="twitter:image" content="https://atomo.in/assets/social-home-twitter.jpg">
     <link rel="icon" type="image/png?v=1.0" href="/assets/mainfavicon.ico" loading="lazy">
-    <link rel="stylesheet" href="news.css?v=1760594587080">
+    <link rel="stylesheet" href="news.css?v=1763552575863">
     
 
 
@@ -36,7 +36,7 @@
     </noscript>
 
     <link rel="preconnect" href="https://rsms.me/">
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css?v=1760594587080" media="print"
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css?v=1763552575863" media="print"
         onload="this.media='all'">
 
     <script type="application/ld+json">
@@ -660,7 +660,7 @@ async function loadNews() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const news = await response.json();
+        const news = await response.js?v=2.2on();
         console.log('News data received:', news);
 
         // Hide loading
@@ -903,13 +903,13 @@ async function openNewsModal(newsId) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         
-        const newsItem = await response.json();
+        const newsItem = await response.js?v=2.2on();
         console.log('News item for modal:', newsItem);
 
         // Create modal
         const modal = document.createElement('div');
         modal.id = 'newsModal';
-        modal.style.cssText = `
+        modal.style.css?v=1763552575863Text = `
             position: fixed;
             top: 0;
             left: 0;
@@ -924,7 +924,7 @@ async function openNewsModal(newsId) {
         `;
 
         const modalContent = document.createElement('div');
-        modalContent.style.cssText = `
+        modalContent.style.css?v=1763552575863Text = `
             background: white;
             border-radius: 12px;
             max-width: 800px;
@@ -1063,7 +1063,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // if (newsHeader) {
     //     const refreshBtn = document.createElement('button');
     //     refreshBtn.textContent = 'Refresh News';
-    //     refreshBtn.style.cssText = `
+    //     refreshBtn.style.css?v=1763552575863Text = `
     //         padding: 8px 16px;
     //         background: #2c3e50;
     //         color: white;
