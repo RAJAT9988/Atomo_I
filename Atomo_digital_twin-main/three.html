@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ATOMO · 3D Office — Horizontal Table (No-modules)</title>
+  <style>
+    :root {
+      --bg: #0b0e13;
+      --panel: #10141d;
+      --ink: #e8ecf3;
+      --muted: #9aa7bf;
+      --brand: #7dd3fc;
+      --accent: #a78bfa;
+      --ok: #7ee787;
+      --warn: #ff7070;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+    }
+    body {
+      margin: 0;
+      background: radial-gradient(1200px 800px at 80% -10%, rgba(125,211,252,.10), transparent),
+                  radial-gradient(900px 700px at 20% 110%, rgba(167,139,250,.06), transparent),
+                  var(--bg);
+      color: var(--ink);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    }
+    .wrap {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 16px;
+      height: 100vh;
+      padding: 16px;
+      overflow: hidden;
+    }
+    .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,.05)), var(--panel);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.05);
+    }
+
+    aside.panel {
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    aside.panel::-webkit-scrollbar {
+      width: 8px;
+    }
+    aside.panel::-webkit-scrollbar-track {
+      background: rgba(255,255,255,.03);
+      border-radius: 4px;
+    }
+    aside.panel::-webkit-scrollbar-thumb {
+      background: rgba(125,211,252,.3);
+      border-radius: 4px;
+    }
+    aside.panel::-webkit-scrollbar-thumb:hover {
+      background: rgba(125,211,252,.5);
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 20px;
+    }
+    .muted {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 10px 0;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.09);
+      transition: .2s;
+      color: var(--ink);
+    }
+    .btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.1);
+    }
+    .btn.primary {
+      background: linear-gradient(180deg, rgba(125,211,252,.25), rgba(125,211,252,.08));
+      border-color: rgba(125,211,252,.4);
+    }
+    .chip {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      color: var(--muted);
+    }
+    .chip.on {
+      color: var(--ok);
+      border-color: rgba(126,231,135,.4);
+      background: rgba(126,231,135,.1);
+    }
+    .chip.off {
+      color: var(--warn);
+      border-color: rgba(255,112,112,.35);
+      background: rgba(255,112,112,.08);
+    }
+    #stage {
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 14px;
+    }
+    .topbar {
+      position: absolute;
+      inset: 12px 12px auto 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 5;
+    }
+    .brand {
+      font-weight: 800;
+      letter-spacing: .4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <aside class="panel">
+      <h1>ATOMO · Office Controls</h1>
+      <div class="muted">Experience our cutting-edge Digital Office Twin - featuring intelligent workstation monitoring, real-time occupancy analytics, and dynamic lighting controls in an immersive 3D environment.</div>
+      <div class="muted" style="margin-top:12px;font-weight:600">WORKSTATION ROOM</div>
+      <div class="row"><span>Main Ceiling Lights</span><button class="btn" id="toggleMain">Toggle</button></div>
+      <div class="row"><span>Light 1 (East Wall)</span><button class="btn" id="toggleLight1">Toggle</button></div>
+      <div class="row"><span>Light 2 (Center)</span><button class="btn" id="toggleLight2">Toggle</button></div>
+      <div class="row"><span>Light 3 (West Wall)</span><button class="btn" id="toggleLight3">Toggle</button></div>
+      <div class="muted" style="margin-top:16px;font-weight:600">SIR'S OFFICE</div>
+      <div class="row"><span>Office Light</span><button class="btn" id="toggleOffice">Toggle</button></div>
+      <div class="muted" style="margin-top:16px;font-weight:600">CONFERENCE ROOM</div>
+      <div class="row"><span>Conference Lights</span><button class="btn" id="toggleConf">Toggle</button></div>
+      <div class="row"><span>Auto Rotate</span><button class="btn" id="toggleAutoRotate">Toggle</button></div>
+      <div class="row"><span>Top View</span><button class="btn" id="topView">Go</button></div>
+      <div class="row"><span>Focus: All</span><button class="btn" id="focusAll">Go</button></div>
+      <div class="row"><span>Focus: Workstation</span><button class="btn" id="focusWS">Go</button></div>
+      <div class="row"><span>Focus: Sir's Office</span><button class="btn" id="focusOffice">Go</button></div>
+      <div class="row"><span>Focus: Conference</span><button class="btn" id="focusConf">Go</button></div>
+      <div class="row"><span>Screenshot</span><button class="btn primary" id="shot">Export</button></div>
+      <hr style="border:none;border-top:1px solid rgba(255,255,255,.1);margin:12px 0"/>
+      <div class="row"><span>People in Office</span><span class="chip" id="peopleChip">0</span></div>
+      <div class="row"><button class="btn" id="occupyAll">Occupy All</button><button class="btn" id="clearAll">Clear All</button></div>
+      <div class="muted">Tip: click a chair to toggle occupied.</div>
+      <div class="chip off" id="statusWork">Workstation OFF</div>
+      <div class="chip off" id="statusOffice">Office OFF</div>
+      <div class="chip off" id="statusConf">Conference OFF</div>
+      <hr style="border:none;border-top:1px solid rgba(255,255,255,.1);margin:12px 0"/>
+      <div class="chip" id="serverStatus" style="color: #ff7070;">🔴 Server Disconnected</div>
+      <div class="chip" id="occupancyStatus" style="color: #7dd3fc;">👥 Occupancy: --</div>
+    </aside>
+
+    <main class="panel" id="stage">
+      <div class="topbar">
+        <div class="chip" id="roomChip">9m × 6m · Ceiling 3m</div>
+      </div>
+      <canvas id="c"></canvas>
+    </main>
+  </div>
+
+  <script src="https://cdn.socket.io/4.5.4/socket.io.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <script>
+    // ========== SOCKET.IO INTEGRATION ==========
+    let socket = null;
+    let serverConnected = false;
+
+    function initSocket() {
+      socket = io('http://localhost:3005', {
+        reconnection: true,
+        reconnectionDelay: 1000,
+        reconnectionDelayMax: 5000,
+        reconnectionAttempts: Infinity
+      });
+
+      socket.on('connect', () => {
+        serverConnected = true;
+        console.log('✅ Connected to server');
+        document.getElementById('serverStatus').innerHTML = '🟢 <b>Server Connected</b>';
+        document.getElementById('serverStatus').style.color = '#22c55e';
+      });
+
+      socket.on('disconnect', () => {
+        serverConnected = false;
+        console.log('❌ Disconnected from server');
+        document.getElementById('serverStatus').innerHTML = '🔴 <b>Server Disconnected</b>';
+        document.getElementById('serverStatus').style.color = '#ff7070';
+      });
+
+      socket.on('roomUpdate', (room) => {
+        console.log('🔄 Room Update:', room);
+        syncRoomState(room);
+      });
+
+      socket.on('sensorUpdate', (rooms) => {
+        rooms.forEach(room => {
+          if (room.id === 3) {
+            document.getElementById('occupancyStatus').textContent = '👥 Occupancy: ' + room.occupancy;
+          }
+        });
+      });
+    }
+
+    function syncRoomState(room) {
+      if (room.id === 3) { // Workspace
+        mainOn = room.lights;
+        light1On = room.lights;
+        light2On = room.lights;
+        light3On = room.lights;
+        mains.forEach(l => l.intensity = room.lights ? (l.userData.normalIntensity || 3.0) : 0.0);
+        wallLights.forEach(l => l.intensity = room.lights ? 3.5 : 0.0);
+      } else if (room.id === 2) { // Conference
+        confOn = room.lights;
+        Light_Conf_1.intensity = room.lights ? 2.5 : 0.0;
+        Light_Conf_2.intensity = room.lights ? 2.5 : 0.0;
+      } else if (room.id === 1) { // Office
+        officeOn = room.lights;
+        Light_MainOffice_1.intensity = room.lights ? 2.5 : 0.0;
+        Light_MainOffice_2.intensity = room.lights ? 2.5 : 0.0;
+        Light_MainOffice_3.intensity = room.lights ? 2.5 : 0.0;
+      }
+      updateAmbientLight();
+      refreshStatus();
+    }
+
+    function toggleRoomLight(roomId, lightKey = 'main') {
+      if (socket && serverConnected) {
+        socket.emit('toggleRoomLight', { roomId, lightKey });
+      }
+    }
+
+    // Initialize socket when page loads
+    window.addEventListener('load', initSocket);
+
+    // ========== THREE.JS CODE ==========
+    const ROOM_W = 9, ROOM_H = 6, CEILING = 3;
+    const CHAIRS_PER_SIDE = 4;
+    const TABLE_RIGHT_GAP = 0.05;
+    const TABLE_LEFT_GAP = 1.20;
+
+    let FAN_RPM = 40;
+    let FAN_ON = true;
+    const FAN_RPS = () => FAN_RPM / 60;
+    let __last = performance.now();
+
+    let autoRotate = true;
+    let autoRotateSpeed = 0.5;
+    let autoRotateUserDisabled = false;
+
+    const TABLE_W_Z = 1.2;
+    const TABLE_L_X = ROOM_W - 1.0;
+    const TABLE_MARGIN_X = 0.5;
+
+    const canvas = document.getElementById('c');
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.shadowMap.enabled = true;
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color('#0b0e13');
+    const camera = new THREE.PerspectiveCamera(50, 2, 0.1, 120);
+    camera.position.set(-7, 6.5, 8);
+
+    let target = new THREE.Vector3(0, 1.8, 0);
+
+    const World_All = new THREE.Group();
+    scene.add(World_All);
+
+    const Group_Workstation = new THREE.Group();
+    const Group_Annex_NE_MainOffice = new THREE.Group();
+    const Group_Annex_NW_Conference = new THREE.Group();
+
+    World_All.add(Group_Workstation, Group_Annex_NE_MainOffice, Group_Annex_NW_Conference);
+
+    document.getElementById('focusAll').onclick = () => focusRoom(World_All, { topView: false });
+    document.getElementById('focusWS').onclick = () => focusRoom(Group_Workstation, { topView: false });
+    document.getElementById('focusOffice').onclick = () => focusRoom(Group_Annex_NE_MainOffice, { topView: false });
+    document.getElementById('focusConf').onclick = () => focusRoom(Group_Annex_NW_Conference, { topView: false });
+
+    document.getElementById('topView').onclick = () => {
+      focusRoom(World_All, { topView: true });
+    };
+
+    let isDown = false, px = 0, py = 0, theta = 0.0, phi = 0.65, dist = CEILING * 2.6;
+
+    canvas.addEventListener('mousedown', e => { 
+      isDown = true; 
+      px = e.clientX; 
+      py = e.clientY;
+      autoRotate = false;
+      autoRotateUserDisabled = true;
+    });
+
+    window.addEventListener('mouseup', () => isDown = false);
+
+    window.addEventListener('mousemove', e => {
+      if (!isDown) return;
+      autoRotate = false;
+      autoRotateUserDisabled = true;
+      theta += (e.clientX - px) / 400;
+      phi += (e.clientY - py) / 400;
+      phi = Math.max(0.0001, Math.min(1.5, phi));
+      px = e.clientX;
+      py = e.clientY;
+    });
+
+    canvas.addEventListener('wheel', e => {
+      autoRotate = false;
+      autoRotateUserDisabled = true;
+      dist += e.deltaY * 0.002;
+      dist = Math.max(5, Math.min(25, dist));
+    });
+
+    function resize() {
+      const w = canvas.clientWidth, h = canvas.clientHeight || 600;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const amb = new THREE.AmbientLight(0xffffff, 0.0);
+    scene.add(amb);
+
+    const floor = new THREE.Mesh(
+      new THREE.PlaneGeometry(ROOM_W, ROOM_H),
+      new THREE.MeshStandardMaterial({ color: 0x2b3145, roughness: .9 })
+    );
+    floor.rotation.x = -Math.PI / 2;
+    floor.receiveShadow = true;
+    Group_Workstation.add(floor);
+
+    const halfW = ROOM_W / 2, halfH = ROOM_H / 2;
+    const wallThickness = 0.15;
+
+    const wallMat = new THREE.MeshStandardMaterial({
+      color: 0xdfe3ea,
+      roughness: 0.7,
+      transparent: true,
+      opacity: 0.35,
+      depthWrite: false,
+      side: THREE.DoubleSide
+    });
+
+    function wall(w, h, t) {
+      const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, t), wallMat);
+      m.castShadow = true;
+      m.receiveShadow = true;
+      return m;
+    }
+
+    const wN = wall(ROOM_W + wallThickness * 2, CEILING, wallThickness);
+    wN.position.set(0, CEILING / 2, -halfH);
+    const wS = wall(ROOM_W + wallThickness * 2, CEILING, wallThickness);
+    wS.position.set(0, CEILING / 2, halfH);
+    const wW = wall(wallThickness, CEILING, ROOM_H);
+    wW.position.set(-halfW, CEILING / 2, 0);
+    const wE = wall(wallThickness, CEILING, ROOM_H);
+    wE.position.set(halfW, CEILING / 2, 0);
+    Group_Workstation.add(wN, wS, wW, wE);
+
+    const door = new THREE.Mesh(
+      new THREE.BoxGeometry(1.0, 2.2, 0.05),
+      new THREE.MeshStandardMaterial({ color: 0x8ea0b8, roughness: .5 })
+    );
+    door.position.set(-halfW + 1.1, 1.1, halfH + 0.03);
+    door.castShadow = true;
+    Group_Workstation.add(door);
+
+    const doorMat = new THREE.MeshStandardMaterial({ color: 0x8ea0b8, roughness: .5 });
+    const Door_NW_to_Conference = new THREE.Mesh(new THREE.BoxGeometry(0.90, 2.2, 0.05), doorMat);
+    Door_NW_to_Conference.position.set(-0.50, 1.1, -halfH + 0.03);
+    Door_NW_to_Conference.castShadow = true;
+    const Door_NE_to_MainOffice = new THREE.Mesh(new THREE.BoxGeometry(0.90, 2.2, 0.05), doorMat);
+    Door_NE_to_MainOffice.position.set(0.50, 1.1, -halfH + 0.03);
+    Door_NE_to_MainOffice.castShadow = true;
+    Group_Workstation.add(Door_NW_to_Conference, Door_NE_to_MainOffice);
+
+    const annexDepth = 3.0;
+    const annexWidth = halfW;
+
+    const ac = addWallAC(3.0, -halfH - annexDepth + 0.12);
+    ac.rotation.y = Math.PI;
+
+    const officeFloor = new THREE.Mesh(new THREE.PlaneGeometry(annexWidth, annexDepth), new THREE.MeshStandardMaterial({ color: 0x2b3145, roughness: 0.9 }));
+    officeFloor.rotation.x = -Math.PI / 2;
+    officeFloor.position.set(annexWidth / 2, 0, -halfH - annexDepth / 2);
+    officeFloor.receiveShadow = true;
+    Group_Annex_NE_MainOffice.add(officeFloor);
+
+    const neWallE = wall(wallThickness, CEILING, annexDepth);
+    neWallE.position.set(halfW, CEILING / 2, -halfH - annexDepth / 2);
+    const neWallN = wall(annexWidth, CEILING, wallThickness);
+    neWallN.position.set(annexWidth / 2, CEILING / 2, -halfH - annexDepth);
+    const neWallW = wall(wallThickness, CEILING, annexDepth);
+    neWallW.position.set(0, CEILING / 2, -halfH - annexDepth / 2);
+    Group_Annex_NE_MainOffice.add(neWallE, neWallN, neWallW);
+
+    const ExecDesk = new THREE.Group();
+    const deskTop = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.08, 0.85), new THREE.MeshStandardMaterial({ color: 0x4a5463, roughness: 0.20, metalness: 0.50, envMapIntensity: 0.9 }));
+    deskTop.position.set(3.0, 0.78, -4.3);
+    deskTop.castShadow = true;
+    deskTop.receiveShadow = true;
+
+    const deskLegMat = new THREE.MeshStandardMaterial({ color: 0x2a2d35, metalness: 0.8, roughness: 0.3 });
+    [-0.8, 0.8].forEach(x => {
+      [-0.35, 0.35].forEach(z => {
+        const leg = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.74, 0.06), deskLegMat);
+        leg.position.set(3.0 + x, 0.37, -4.3 + z);
+        leg.castShadow = true;
+        ExecDesk.add(leg);
+      });
+    });
+    ExecDesk.add(deskTop);
+    Group_Annex_NE_MainOffice.add(ExecDesk);
+
+    const Light_MainOffice_1 = new THREE.PointLight(0xfff2cc, 0.0, 6.5, 2);
+    Light_MainOffice_1.position.set(2.25, CEILING - 0.2, -4.5);
+    Light_MainOffice_1.castShadow = true;
+    Group_Annex_NE_MainOffice.add(Light_MainOffice_1);
+
+    const Light_MainOffice_2 = new THREE.PointLight(0xfff2cc, 0.0, 6.5, 2);
+    Light_MainOffice_2.position.set(3.75, CEILING - 0.2, -4.5);
+    Light_MainOffice_2.castShadow = true;
+    Group_Annex_NE_MainOffice.add(Light_MainOffice_2);
+
+    const Light_MainOffice_3 = new THREE.PointLight(0xfff2cc, 0.0, 6.5, 2);
+    Light_MainOffice_3.position.set(3.0, CEILING - 0.2, -4.0);
+    Light_MainOffice_3.castShadow = true;
+    Group_Annex_NE_MainOffice.add(Light_MainOffice_3);
+
+    scene.add(Group_Annex_NE_MainOffice);
+
+    const confFloor = new THREE.Mesh(new THREE.PlaneGeometry(annexWidth, annexDepth), new THREE.MeshStandardMaterial({ color: 0x2b3145, roughness: 0.85 }));
+    confFloor.rotation.x = -Math.PI / 2;
+    confFloor.position.set(-annexWidth / 2, 0, -halfH - annexDepth / 2);
+    confFloor.receiveShadow = true;
+    Group_Annex_NW_Conference.add(confFloor);
+
+    const nwWallW = wall(wallThickness, CEILING, annexDepth);
+    nwWallW.position.set(-halfW, CEILING / 2, -halfH - annexDepth / 2);
+    const nwWallN = wall(annexWidth, CEILING, wallThickness);
+    nwWallN.position.set(-annexWidth / 2, CEILING / 2, -halfH - annexDepth);
+    const nwWallE = wall(wallThickness, CEILING, annexDepth);
+    nwWallE.position.set(0, CEILING / 2, -halfH - annexDepth / 2);
+    Group_Annex_NW_Conference.add(nwWallW, nwWallN, nwWallE);
+
+    const ConfTable = new THREE.Mesh(new THREE.BoxGeometry(1.9, 0.08, 1.9), new THREE.MeshStandardMaterial({ color: 0x4a5463, roughness: 0.20, metalness: 0.50, envMapIntensity: 0.9 }));
+    ConfTable.position.set(-2.25, 0.76, -4.5);
+    ConfTable.castShadow = true;
+    ConfTable.receiveShadow = true;
+
+    const confLegMat = new THREE.MeshStandardMaterial({ color: 0xc8ccd4, metalness: 0.95, roughness: 0.15 });
+    [-0.75, 0.75].forEach(x => {
+      [-0.75, 0.75].forEach(z => {
+        const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.055, 0.74, 20), confLegMat);
+        leg.position.set(-2.25 + x, 0.37, -4.5 + z);
+        leg.castShadow = true;
+        const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.02, 20), confLegMat);
+        cap.position.set(-2.25 + x, 0.75, -4.5 + z);
+        cap.castShadow = true;
+        Group_Annex_NW_Conference.add(cap, leg);
+      });
+    });
+    Group_Annex_NW_Conference.add(ConfTable);
+
+    const Light_Conf_1 = new THREE.PointLight(0xfff2cc, 0.0, 6.5, 2);
+    Light_Conf_1.position.set(-3.4, CEILING - 0.2, -4.5);
+    Light_Conf_1.castShadow = true;
+
+    const Light_Conf_2 = new THREE.PointLight(0xfff2cc, 0.0, 6.5, 2);
+    Light_Conf_2.position.set(-1.1, CEILING - 0.2, -4.5);
+    Light_Conf_2.castShadow = true;
+
+    Group_Annex_NW_Conference.add(Light_Conf_1, Light_Conf_2);
+
+    const tableMat = new THREE.MeshStandardMaterial({ color: 0x6b7280, roughness: 0.35, metalness: 0.45, envMapIntensity: 0.6 });
+    const tableTop = new THREE.Mesh(new THREE.BoxGeometry(TABLE_L_X, 0.08, TABLE_W_Z), tableMat);
+    tableTop.castShadow = true;
+    tableTop.receiveShadow = true;
+
+    const usableX = ROOM_W - (TABLE_LEFT_GAP + TABLE_RIGHT_GAP);
+    const baseX = (halfW - TABLE_RIGHT_GAP) - (usableX / 2);
+
+    tableTop.position.set(baseX, 0.78, 0);
+    tableTop.scale.x = usableX / TABLE_L_X;
+    scene.add(tableTop);
+
+    const mains = [];
+    const workstationPts = [
+      { x: 1.5, z: -0.5, intensity: 2.5 },
+      { x: 1.5, z: 0.5, intensity: 2.5 },
+      { x: 3.5, z: -0.5, intensity: 2.5 },
+      { x: 3.5, z: 0.5, intensity: 2.5 }
+    ];
+    workstationPts.forEach(p => {
+      const l = new THREE.PointLight(0xfff2cc, 0.0, 15, 1.8);
+      l.position.set(p.x, CEILING - 0.2, p.z);
+      l.castShadow = true;
+      l.shadow.mapSize.set(1024, 1024);
+      l.userData.normalIntensity = p.intensity;
+      scene.add(l);
+      mains.push(l);
+    });
+
+    const centerSpot = new THREE.PointLight(0xfff8e1, 0.0, 12, 1.5);
+    centerSpot.position.set(baseX, CEILING - 0.3, 0);
+    centerSpot.castShadow = true;
+    centerSpot.shadow.mapSize.set(1024, 1024);
+    centerSpot.userData.normalIntensity = 4.0;
+    scene.add(centerSpot);
+    mains.push(centerSpot);
+
+    const wallLights = [];
+    const light1 = new THREE.SpotLight(0xfff2cc, 0.0, 12, Math.PI / 3, 0.4, 1.2);
+    light1.position.set(halfW - 0.25, 2.0, 0);
+    light1.target.position.set(baseX + usableX / 3, 0.8, 0);
+    light1.castShadow = true;
+    light1.shadow.mapSize.set(1024, 1024);
+    scene.add(light1, light1.target);
+    wallLights.push(light1);
+
+    const light2 = new THREE.SpotLight(0xfff2cc, 0.0, 10, Math.PI / 3.5, 0.3, 1.3);
+    light2.position.set(baseX, 2.2, 0);
+    light2.target.position.set(baseX, 0.8, 0);
+    light2.castShadow = true;
+    light2.shadow.mapSize.set(1024, 1024);
+    scene.add(light2, light2.target);
+    wallLights.push(light2);
+
+    const light3 = new THREE.SpotLight(0xfff2cc, 0.0, 12, Math.PI / 3, 0.4, 1.2);
+    light3.position.set(-halfW + 0.25, 2.0, 0);
+    light3.target.position.set(baseX - usableX / 3, 0.8, 0);
+    light3.castShadow = true;
+    light3.shadow.mapSize.set(1024, 1024);
+    scene.add(light3, light3.target);
+    wallLights.push(light3);
+
+    const fanBlades = [];
+    function addCeilingFan(x, z) {
+      const fan = new THREE.Group();
+      const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 0.28, 16), new THREE.MeshStandardMaterial({ color: 0x5b3a1d, metalness: 0.4, roughness: 0.5 }));
+      stem.position.set(0, CEILING - 0.28, 0);
+      const hub = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.05, 24), new THREE.MeshStandardMaterial({ color: 0x704423, metalness: 0.5, roughness: 0.4 }));
+      hub.position.set(0, CEILING - 0.31, 0);
+      const bladeMat = new THREE.MeshStandardMaterial({ color: 0x8a5a2b, metalness: 0.35, roughness: 0.45 });
+      const bladeGeo = new THREE.BoxGeometry(0.55, 0.02, 0.10);
+      const bladeGroup = new THREE.Group();
+      for (let i = 0; i < 4; i++) {
+        const blade = new THREE.Mesh(bladeGeo, bladeMat);
+        blade.position.set(0.27, 0, 0);
+        blade.rotation.y = Math.PI / 40;
+        const arm = new THREE.Group();
+        arm.rotation.y = i * (Math.PI / 2);
+        arm.add(blade);
+        bladeGroup.add(arm);
+      }
+      bladeGroup.position.set(0, CEILING - 0.31, 0);
+      bladeGroup.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = false; } });
+      const cap = new THREE.Mesh(new THREE.SphereGeometry(0.045, 16, 16), new THREE.MeshStandardMaterial({ color: 0x5b3a1d, metalness: 0.5, roughness: 0.4 }));
+      cap.position.set(0, CEILING - 0.25, 0);
+      fan.add(stem, hub, bladeGroup, cap);
+      fan.position.set(x, 0, z);
+      Group_Workstation.add(fan);
+      fanBlades.push(bladeGroup);
+      return fan;
+    }
+
+    const confCenterX = -annexWidth / 2;
+    const confCenterZ = -halfH - (annexDepth / 2);
+    addCeilingFan(confCenterX, confCenterZ);
+
+    const FAN_X = baseX;
+    const FAN_OFFSET_Z = (TABLE_W_Z / 2) + 0.45;
+    addCeilingFan(FAN_X, FAN_OFFSET_Z);
+    addCeilingFan(FAN_X, -FAN_OFFSET_Z);
+
+    function addWallAC(x, wallZ) {
+      const ac = new THREE.Group();
+      const bodyMat = new THREE.MeshStandardMaterial({ color: 0xf5f7fb, roughness: 0.35, metalness: 0.15 });
+      const faceMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.22, metalness: 0.10 });
+      const ventMat = new THREE.MeshStandardMaterial({ color: 0xe9edf3, roughness: 0.65, metalness: 0.08 });
+      const body = new THREE.Mesh(new THREE.BoxGeometry(0.92, 0.28, 0.22), bodyMat);
+      body.castShadow = true;
+      body.receiveShadow = true;
+      const face = new THREE.Mesh(new THREE.BoxGeometry(0.92, 0.02, 0.24), faceMat);
+      face.position.set(0, 0.06, -0.11);
+      const flap = new THREE.Mesh(new THREE.BoxGeometry(0.88, 0.02, 0.18), ventMat);
+      flap.position.set(0, -0.08, -0.06);
+      flap.rotation.x = -0.28;
+      const slatGroup = new THREE.Group();
+      for (let i = 0; i < 6; i++) {
+        const slat = new THREE.Mesh(new THREE.BoxGeometry(0.86, 0.005, 0.015), ventMat);
+        slat.position.set(0, -0.055 - i * 0.01, -0.045);
+        slatGroup.add(slat);
+      }
+      ac.add(body, face, flap, slatGroup);
+      ac.position.set(x, 2.25, wallZ - 0.06);
+      scene.add(ac);
+      return ac;
+    }
+
+    addWallAC(-halfW + 3.0, halfH);
+
+    const chairs = [];
+
+    function createOfficeChair(px, pz, side) {
+      const chair = new THREE.Group();
+      const seatMat = new THREE.MeshStandardMaterial({ color: 0x1a1d24, roughness: 0.6, metalness: 0.2 });
+      const backMat = new THREE.MeshStandardMaterial({ color: 0x1e2129, roughness: 0.55, metalness: 0.25 });
+      chair.userData.originalColors = { seat: 0x1a1d24, back: 0x1e2129 };
+      const baseMat = new THREE.MeshStandardMaterial({ color: 0x2b2f3a, roughness: 0.4, metalness: 0.6 });
+      
+      const seat = new THREE.Mesh(new THREE.BoxGeometry(0.48, 0.08, 0.46), seatMat);
+      seat.position.set(px, 0.50, pz);
+      seat.castShadow = true;
+      seat.receiveShadow = true;
+
+      const backrest = new THREE.Mesh(new THREE.BoxGeometry(0.48, 0.55, 0.08), backMat);
+      backrest.position.set(px, 0.80, pz + (side > 0 ? 0.22 : -0.22));
+      backrest.rotation.x = (side > 0 ? -0.1 : 0.1);
+      backrest.castShadow = true;
+
+      const lumbar = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.15, 0.06), backMat);
+      lumbar.position.set(px, 0.62, pz + (side > 0 ? 0.20 : -0.20));
+      lumbar.castShadow = true;
+
+      const column = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.04, 0.45, 16), baseMat);
+      column.position.set(px, 0.25, pz);
+      column.castShadow = true;
+
+      const starBase = new THREE.Group();
+      for (let i = 0; i < 5; i++) {
+        const angle = (i / 5) * Math.PI * 2;
+        const arm = new THREE.Mesh(new THREE.BoxGeometry(0.25, 0.02, 0.04), baseMat);
+        arm.position.x = Math.cos(angle) * 0.125;
+        arm.position.z = Math.sin(angle) * 0.125;
+        arm.rotation.y = angle;
+
+        const wheel = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 0.02, 12), new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.7 }));
+        wheel.rotation.z = Math.PI / 2;
+        wheel.position.x = Math.cos(angle) * 0.22;
+        wheel.position.z = Math.sin(angle) * 0.22;
+
+        starBase.add(arm, wheel);
+      }
+      starBase.position.set(px, 0.03, pz);
+      starBase.traverse(o => { if (o.isMesh) o.castShadow = true; });
+
+      const armrestMat = new THREE.MeshStandardMaterial({ color: 0x2a2d35, roughness: 0.5, metalness: 0.3 });
+      const armLeft = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.28, 0.25), armrestMat);
+      armLeft.position.set(px - 0.28, 0.60, pz);
+      armLeft.castShadow = true;
+
+      const armRight = armLeft.clone();
+      armRight.position.set(px + 0.28, 0.60, pz);
+      armRight.castShadow = true;
+
+      chair.add(seat, backrest, lumbar, column, starBase, armLeft, armRight);
+      chair.userData.occupied = false;
+      chair.userData.parts = { seat, backrest };
+
+      scene.add(chair);
+      chairs.push(chair);
+    }
+
+    for (let i = 0; i < CHAIRS_PER_SIDE; i++) {
+      const xLocal = -usableX / 2 + (i + 1) * (usableX / (CHAIRS_PER_SIDE + 1));
+      const x = baseX + xLocal;
+      createOfficeChair(x, -(TABLE_W_Z / 2 + 0.38), -1);
+      createOfficeChair(x, (TABLE_W_Z / 2 + 0.38), +1);
+    }
+
+    function addLaptop(cx, cz, facingSide = 1) {
+      const base = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.02, 0.22), new THREE.MeshStandardMaterial({ color: 0x2d3344, roughness: .6, metalness: .1 }));
+      base.position.set(cx, tableTop.position.y + 0.05, cz);
+      base.castShadow = true;
+      base.receiveShadow = true;
+      const screenMat = new THREE.MeshStandardMaterial({ color: 0x1c2233, emissive: 0x111827, emissiveIntensity: 0.0, roughness: .5 });
+      const screen = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.20, 0.01), screenMat);
+      screen.position.set(cx, base.position.y + 0.12, cz + (facingSide > 0 ? -0.10 : 0.10));
+      screen.rotation.x = (facingSide > 0 ? -1 : 1) * 0.95;
+      scene.add(base, screen);
+    }
+
+    for (let i = 0; i < CHAIRS_PER_SIDE; i++) {
+      const xLocal = -usableX / 2 + (i + 1) * (usableX / (CHAIRS_PER_SIDE + 1));
+      const x = baseX + xLocal;
+      addLaptop(x, -(TABLE_W_Z / 2 - 0.18), +1);
+      addLaptop(x, (TABLE_W_Z / 2 - 0.18), -1);
+    }
+
+    function leg(x, z) {
+      const legMat = new THREE.MeshStandardMaterial({ color: 0x2a2d35, roughness: 0.25, metalness: 0.85 });
+      const m = new THREE.Mesh(new THREE.CylinderGeometry(0.038, 0.042, 0.74, 20), legMat);
+      m.position.set(x, 0.37, z);
+      m.castShadow = true;
+
+      const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.045, 0.015, 20), legMat);
+      cap.position.set(x, 0.75, z);
+      cap.castShadow = true;
+
+      scene.add(m, cap);
+      return m;
+    }
+
+    const dx = usableX / 2 - 0.12;
+    const lz = (TABLE_W_Z / 2 - 0.1), rz = -(TABLE_W_Z / 2 - 0.1);
+    leg(baseX - dx, lz);
+    leg(baseX - dx, rz);
+    leg(baseX + dx, lz);
+    leg(baseX + dx, rz);
+
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+
+    function updatePeopleChip() {
+      document.getElementById('peopleChip').textContent = chairs.filter(c => c.userData.occupied).length;
+    }
+
+    function setChairOccupied(chair, on) {
+      chair.userData.occupied = on;
+      if (on) {
+        chair.userData.parts.seat.material.color.set(0x2daa62);
+        chair.userData.parts.backrest.material.color.set(0x2daa62);
+      } else {
+        chair.userData.parts.seat.material.color.set(chair.userData.originalColors.seat);
+        chair.userData.parts.backrest.material.color.set(chair.userData.originalColors.back);
+      }
+      updatePeopleChip();
+    }
+
+    canvas.addEventListener('click', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+      raycaster.setFromCamera(mouse, camera);
+      const objs = chairs.map(g => g.children).flat();
+      const hits = raycaster.intersectObjects(objs, true);
+      if (hits.length) {
+        const chair = chairs.find(c => c.children.includes(hits[0].object) || c.children.some(k => k === hits[0].object.parent));
+        if (chair) {
+          setChairOccupied(chair, !chair.userData.occupied);
+        }
+      }
+    });
+
+    let mainOn = true, light1On = true, light2On = true, light3On = true, officeOn = true, confOn = true;
+    const statusWork = document.getElementById('statusWork');
+    const statusOffice = document.getElementById('statusOffice');
+    const statusConf = document.getElementById('statusConf');
+
+    function refreshStatus() {
+      statusWork.className = 'chip ' + ((mainOn || light1On || light2On || light3On) ? 'on' : 'off');
+      statusWork.textContent = (mainOn ? 'Main ON' : 'Main OFF') + ' · L1:' + (light1On ? 'ON' : 'OFF') + ' L2:' + (light2On ? 'ON' : 'OFF') + ' L3:' + (light3On ? 'ON' : 'OFF');
+      statusOffice.className = 'chip ' + (officeOn ? 'on' : 'off');
+      statusOffice.textContent = officeOn ? 'Office ON' : 'Office OFF';
+      statusConf.className = 'chip ' + (confOn ? 'on' : 'off');
+      statusConf.textContent = confOn ? 'Conference ON' : 'Conference OFF';
+    }
+
+    function updateAmbientLight() {
+      const anyLightOn = mainOn || light1On || light2On || light3On || officeOn || confOn;
+      amb.intensity = anyLightOn ? 0.85 : 0.08;
+    }
+
+    function initializeLights() {
+      mains.forEach(l => l.intensity = l.userData.normalIntensity || 3.0);
+      wallLights[0].intensity = 3.5;
+      wallLights[1].intensity = 3.5;
+      wallLights[2].intensity = 3.5;
+      Light_MainOffice_1.intensity = 2.5;
+      Light_MainOffice_2.intensity = 2.5;
+      Light_MainOffice_3.intensity = 2.5;
+      Light_Conf_1.intensity = 2.5;
+      Light_Conf_2.intensity = 2.5;
+      amb.intensity = 0.85;
+      refreshStatus();
+    }
+
+    initializeLights();
+
+    document.getElementById('toggleMain').onclick = () => {
+      mainOn = !mainOn;
+      mains.forEach(l => l.intensity = mainOn ? (l.userData.normalIntensity || 3.0) : 0.0);
+      updateAmbientLight();
+      refreshStatus();
+      toggleRoomLight(3, 'main');
+    };
+
+    document.getElementById('toggleLight1').onclick = () => {
+      light1On = !light1On;
+      wallLights[0].intensity = light1On ? 3.5 : 0.0;
+      updateAmbientLight();
+      refreshStatus();
+      toggleRoomLight(3, 'light1');
+    };
+
+    document.getElementById('toggleLight2').onclick = () => {
+      light2On = !light2On;
+      wallLights[1].intensity = light2On ? 3.5 : 0.0;
+      updateAmbientLight();
+      refreshStatus();
+      toggleRoomLight(3, 'light2');
+    };
+
+    document.getElementById('toggleLight3').onclick = () => {
+      light3On = !light3On;
+      wallLights[2].intensity = light3On ? 3.5 : 0.0;
+      updateAmbientLight();
+      refreshStatus();
+      toggleRoomLight(3, 'light3');
+    };
+
+    document.getElementById('toggleOffice').onclick = () => {
+      officeOn = !officeOn;
+      Light_MainOffice_1.intensity = officeOn ? 2.5 : 0.0;
+      Light_MainOffice_2.intensity = officeOn ? 2.5 : 0.0;
+      Light_MainOffice_3.intensity = officeOn ? 2.5 : 0.0;
+      updateAmbientLight();
+      refreshStatus();
+      toggleRoomLight(1, 'main');
+    };
+
+    document.getElementById('toggleConf').onclick = () => {
+      confOn = !confOn;
+      Light_Conf_1.intensity = confOn ? 2.5 : 0.0;
+      Light_Conf_2.intensity = confOn ? 2.5 : 0.0;
+      updateAmbientLight();
+      refreshStatus();
+      toggleRoomLight(2, 'main');
+    };
+
+    document.getElementById('toggleAutoRotate').onclick = () => {
+      autoRotate = !autoRotate;
+      autoRotateUserDisabled = !autoRotate;
+    };
+
+    document.getElementById('shot').onclick = () => {
+      renderer.render(scene, camera);
+      const a = document.createElement('a');
+      a.href = renderer.domElement.toDataURL('image/png');
+      a.download = 'atomo_office.png';
+      a.click();
+    };
+
+    document.getElementById('occupyAll').onclick = () => chairs.forEach(c => setChairOccupied(c, true));
+    document.getElementById('clearAll').onclick = () => chairs.forEach(c => setChairOccupied(c, false));
+
+    updatePeopleChip();
+
+    requestAnimationFrame(() => {
+      focusRoom(World_All, { topView: true, padding: 1.2 });
+    });
+
+    function bboxOf(object3D) {
+      return new THREE.Box3().setFromObject(object3D);
+    }
+
+    function centerOf(object3D) {
+      const c = new THREE.Vector3();
+      bboxOf(object3D).getCenter(c);
+      return c;
+    }
+
+    function sizeOf(object3D) {
+      const s = new THREE.Vector3();
+      bboxOf(object3D).getSize(s);
+      return s;
+    }
+
+    function focusRoom(group, { padding = 1.18, topView = false } = {}) {
+      const c = centerOf(group);
+      const s = sizeOf(group);
+      const maxDim = Math.max(s.x, s.y, s.z);
+      const fitDist = (maxDim * padding) / (2 * Math.tan((camera.fov * Math.PI / 180) / 2));
+
+      target.copy(c);
+
+      autoRotate = false;
+      autoRotateUserDisabled = true;
+
+      if (topView) {
+        theta = 0;
+        phi = 0.0001;
+      } else {
+        theta = Math.PI * 0.18;
+        phi = 0.65;
+      }
+
+      dist = THREE.MathUtils.clamp(fitDist, 5, 40);
+    }
+
+    function animate() {
+      if (autoRotate && !autoRotateUserDisabled) {
+        theta += autoRotateSpeed * 0.01;
+        phi = 0.78;
+        dist = 13;
+      }
+
+      const x = Math.cos(theta) * Math.sin(phi) * dist;
+      const y = Math.cos(phi) * dist * 0.7;
+      const z = Math.sin(theta) * Math.sin(phi) * dist;
+      camera.position.set(target.x + x, target.y + y, target.z + z);
+      camera.lookAt(target);
+
+      const now = performance.now();
+      const dt = Math.min(0.05, (now - __last) / 1000);
+      __last = now;
+
+      const omega = FAN_ON ? (2 * Math.PI * FAN_RPS()) : 0;
+      fanBlades.forEach(g => {
+        g.rotation.y += omega * dt;
+      });
+
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>

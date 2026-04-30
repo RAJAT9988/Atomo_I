@@ -15,11 +15,9 @@ Allow: /airowl_page/
 Allow: /atomicos_page/
 Allow: /carrier_page/
 Allow: /electron_page/
-Allow: /matter_page/
 Allow: /neutron_page/
 Allow: /presskit_page/
 Allow: /proton_page/
-Allow: /smarthome_page/
 
 # Block unnecessary file types
 Disallow: /*.log$
