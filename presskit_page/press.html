@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 
 <html lang="en">
-<head><meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<head>
+    <link rel="stylesheet" href="/assets/navbar-shell.css?v=1.0">
+    <style id="navbar-critical">:root{--text-light:#f7fafc}html{background-color:#181818}#site-header{position:relative;z-index:10001;min-height:60px}#navbar{position:fixed;top:0;left:0;right:0;background-color:rgb(24 24 24/.96);height:60px;z-index:100;width:100%;display:flex;align-items:center;visibility:visible;opacity:1}#navbar ul{display:flex;list-style:none;margin:0 auto;padding:0 24px;align-items:center;gap:16px;max-width:1280px;width:100%;justify-content:center;visibility:visible;opacity:1}#navbar a{color:#f7fafc;text-decoration:none;font-size:.95rem;font-weight:500;padding:12px 16px;line-height:64px;visibility:visible;opacity:1}#navbar li{opacity:1;visibility:visible}</style>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <link href="https://atomo.in/press.html" rel="canonical"/>
 <meta charset="utf-8"/>
 <meta content="Atomo Press Kit - Media resources, company information, product images, and press releases for journalists and content creators." name="description"/>
@@ -116,8 +119,9 @@
 </script>
 <meta content="summary_large_image" name="twitter:card"/><meta content="Atomo Press Kit | Media Resources &amp; Company Information" name="twitter:title"/><meta content="Media resources, company information, and press releases for journalists." name="twitter:description"/><meta content="https://atomo.in/press/assets/social-press.jpg" name="twitter:image"/></head>
 <body>
-<!-- First Page Section -->
-<section id="first-page">
+    <script src="/assets/nav-router.js?v=1.0" defer data-nav-persist></script>
+
+<header id="site-header" class="site-header">
 <div class="hamburger" id="hamburger">
 <span></span>
 <span></span>
@@ -138,6 +142,11 @@
 <li><a href="/blogs/blogs.html">Blogs</a></li>
 </ul>
 </nav>
+</header>
+<!-- First Page Section -->
+<section id="first-page">
+
+
 <!-- Press and Media Content -->
 <div class="press-media-container">
 <h1 class="press-title">Press and Media</h1>

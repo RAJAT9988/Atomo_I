@@ -2,6 +2,9 @@
 <html lang="en">
 
    <head>
+    <link rel="stylesheet" href="/assets/navbar-shell.css?v=1.0">
+    <style id="navbar-critical">:root{--text-light:#f7fafc}html{background-color:#181818}#site-header{position:relative;z-index:10001;min-height:60px}#navbar{position:fixed;top:0;left:0;right:0;background-color:rgb(24 24 24/.96);height:60px;z-index:100;width:100%;display:flex;align-items:center;visibility:visible;opacity:1}#navbar ul{display:flex;list-style:none;margin:0 auto;padding:0 24px;align-items:center;gap:16px;max-width:1280px;width:100%;justify-content:center;visibility:visible;opacity:1}#navbar a{color:#f7fafc;text-decoration:none;font-size:.95rem;font-weight:500;padding:12px 16px;line-height:64px;visibility:visible;opacity:1}#navbar li{opacity:1;visibility:visible}</style>
+
  <link rel="canonical" href="https://atomo.in/blogs/blogs.html">
     <meta charset="UTF-8">
     <meta name="description"
@@ -42,16 +45,20 @@
   }
 }
 </script>
+    <style id="blogs-critical">html,body{background-color:#fff;margin:0;padding:0}#first-page{background-color:#fff;min-height:80vh}#second-page{background-color:#fff}</style>
     <link rel="stylesheet" href="blogs.css?v=1763552575863">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
+    <link rel="preload"
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-        rel="stylesheet">
-    <link rel="preconnect" href="https://rsms.me/">
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css?v=1763552575863">
-    <!-- Ensure Quill CSS for rendering formatted content -->
-    <link href="https://cdn.js?v=2.2delivr.net/npm/quill@2.0.2/dist/quill.snow.css?v=1763552575863" rel="stylesheet">
+        as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap">
+    </noscript>
+    <!-- Quill CSS: deferred — only needed for blog popup, not initial paint -->
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" media="print"
+        onload="this.media='all'">
     <style>
         #blog-content {
             font-family: 'Inter', sans-serif;
@@ -114,17 +121,19 @@
 </head>
 
 <body>
+    <script src="/assets/nav-router.js?v=1.0" defer data-nav-persist></script>
 
-    <section id="first-page">
-        <div id="hamburger" class="hamburger">
+    
+<header id="site-header" class="site-header">
+<div id="hamburger" class="hamburger">
             <span></span>
             <span></span>
             <span></span>
         </div>
-        <a href="/index.html"><img alt="Atomo Logo" class="logo1" decoding="async" loading="lazy" src="/assets/atomoheaderlogo.png?v=1.1?v=1.0"/></a>
-        <nav id="navbar">
+<a href="/index.html"><img alt="Atomo Logo" class="logo1" width="32" height="32" decoding="async" loading="lazy" src="/assets/atomoheaderlogo.png?v=1.1?v=1.0"/></a>
+<nav id="navbar">
             <ul>
-                <a href="/index.html"><img class="navbar-logo" src="/assets/atomoheaderlogo.png?v=1.1" loading="lazy" alt="Atomo Logo"></a>
+                <a href="/index.html"><img class="navbar-logo" width="32" height="32" src="/assets/atomoheaderlogo.png?v=1.1" loading="lazy" decoding="async" alt="Atomo Logo"></a>
                 <li><a href="/electron_page/electron.html">Electron</a></li>
                 <li><a href="/proton_page/proton.html">Proton</a></li>
                 <li><a href="/neutron_page/neutron.html">Neutron</a></li>
@@ -137,6 +146,11 @@
                 
             </ul>
         </nav>
+</header>
+<section id="first-page">
+        
+        
+        
 
         <div class="content">
             <div class="header-text">
@@ -205,13 +219,13 @@
                     <p class="footer-tagline">Innovating the future of smart living</p>
                     <div class="footer-social">
                         <a href="https://x.com/AtomoHQ" class="social-link"><img
-                                src="https://img.icons8.com/ios-filled/50/ffffff/twitterx.png?v=1.1" loading="lazy" alt="Twitter"></a>
+                                src="https://img.icons8.com/ios-filled/50/ffffff/twitterx.png?v=1.1" width="24" height="24" loading="lazy" decoding="async" alt="Twitter"></a>
                         <a href="https://www.facebook.com/profile.php?id=61574809191751" class="social-link"><img
-                                src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png?v=1.1" loading="lazy" alt="Facebook"></a>
+                                src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png?v=1.1" width="24" height="24" loading="lazy" decoding="async" alt="Facebook"></a>
                         <a href="https://www.instagram.com/atomo.in/" class="social-link"><img
-                                src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png?v=1.1" loading="lazy" alt="Instagram"></a>
+                                src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png?v=1.1" width="24" height="24" loading="lazy" decoding="async" alt="Instagram"></a>
                         <a href="https://www.linkedin.com/company/atomo-in" class="social-link"><img
-                                src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png?v=1.1" loading="lazy" alt="LinkedIn"></a>
+                                src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png?v=1.1" width="24" height="24" loading="lazy" decoding="async" alt="LinkedIn"></a>
                     </div>
                 </div>
                 <div class="footer-links">
@@ -272,7 +286,7 @@
                 <p id="blog-subtitle" class="blog-subtitle"></p>
                 <div class="blog-meta">
                     <div class="author">
-                        <img id="blog-author-img" src="" alt="Author Image">
+                        <img id="blog-author-img" src="" width="50" height="50" loading="lazy" decoding="async" alt="Author Image">
                         <span id="blog-author"></span>
                     </div>
                     <p id="blog-date" class="blog-date"></p>
@@ -282,7 +296,6 @@
         </div>
     </div>
 
-    <script src="/mainindex.js?v=2.2" defer></script>
     <script src="/blogs/blogs.js?v=2.2" defer></script>
 
     <script>

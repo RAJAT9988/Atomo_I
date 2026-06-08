@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="/assets/navbar-shell.css?v=1.0">
+    <style id="navbar-critical">:root{--text-light:#f7fafc}html{background-color:#181818}#site-header{position:relative;z-index:10001;min-height:60px}#navbar{position:fixed;top:0;left:0;right:0;background-color:rgb(24 24 24/.96);height:60px;z-index:100;width:100%;display:flex;align-items:center;visibility:visible;opacity:1}#navbar ul{display:flex;list-style:none;margin:0 auto;padding:0 24px;align-items:center;gap:16px;max-width:1280px;width:100%;justify-content:center;visibility:visible;opacity:1}#navbar a{color:#f7fafc;text-decoration:none;font-size:.95rem;font-weight:500;padding:12px 16px;line-height:64px;visibility:visible;opacity:1}#navbar li{opacity:1;visibility:visible}</style>
+
     <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
     <link href="https://atomo.in/neutron.html" rel="canonical"/>
     <meta charset="utf-8"/>
@@ -140,15 +143,16 @@
     </script>
 </head>
 <body>
-    <!-- First Page Section -->
-    <section id="first-page">
-        <div class="hamburger" id="hamburger">
+    <script src="/assets/nav-router.js?v=1.0" defer data-nav-persist></script>
+    
+<header id="site-header" class="site-header">
+<div class="hamburger" id="hamburger">
             <span></span>
             <span></span>
             <span></span>
         </div>
-        <a href="/index.html"><img alt="Atomo Logo" class="logo1" decoding="async" loading="lazy" src="/assets/atomoheaderlogo.png?v=1.1"/></a>
-        <nav id="navbar">
+<a href="/index.html"><img alt="Atomo Logo" class="logo1" decoding="async" loading="lazy" src="/assets/atomoheaderlogo.png?v=1.1"/></a>
+<nav id="navbar">
             <ul>
                 <a href="/index.html"><img alt="Atomo Logo" class="navbar-logo" decoding="async" loading="lazy" src="/assets/atomoheaderlogo.png?v=1.1"/></a>
                 <li><a href="/electron_page/electron.html">Electron</a></li>
@@ -162,6 +166,12 @@
                 <li><a href="/blogs/blogs.html">Blogs</a></li>
             </ul>
         </nav>
+</header>
+<!-- First Page Section -->
+    <section id="first-page">
+        
+        
+        
         <div class="matter-content">
             <h1 id="main-title">Neutron</h1>
             <p id="subtitle">"Smart living made affordable"</p>
